@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- <Cookie/> -->
     <div>
       <div class="top-part">
         <Header />
@@ -12,13 +13,17 @@
     <div class="main-part">
       <Main v-bind:productsArray="products" />
       <div class="aside-part">
+        <LoginForm/>
         <Aside v-bind:toggle="toggleArray" />
         <Preloader />
         
         <ProductsCard v-bind:product="products[2]" />
       </div>
     </div>
-
+    <div class="persons">
+      <PersonCard :keys='object'/>
+    </div>
+    
     <Footer />
   </div>
 </template>
@@ -32,6 +37,9 @@ import Footer from "./components/Footer.vue";
 import ProductsCard from "./components/ProductsCard.vue";
 import Preloader from "./components/Preloader.vue";
 import Toast from './components/Toast.vue';
+// import Cookie from './components/Cookie.vue'
+import PersonCard from './components/PersonsCard.vue'
+import LoginForm from './components/LoginForm.vue'
 
 export default {
   components: {
@@ -42,12 +50,18 @@ export default {
     Footer,
     ProductsCard,
     Preloader,
-    Toast
+    Toast,
+    // Cookie,
+    PersonCard,
+    LoginForm
   },
   data() {
     return {
       toggleArray: ["Toggle One", "Toggle Two", "Toggle Three"],
       message: "Your shopping is good for our money bag! 👌",
+      object: null,
+
+    
       products: [
         {
           productId: 1000,
@@ -121,9 +135,56 @@ export default {
           productSalePrice: "25121.63",
           rating: 4,
         },
+        {
+          productId: 1000,
+          productName: "delightful chocolate Ilise",
+          productImage: "https://picsum.photos/400?image=659",
+          productStock: 81,
+          productPrice: "23488.67",
+          productSalePrice: "23488.67",
+          rating: 4,
+        },
+        {
+          productId: 1009,
+          productName: "indirect indigo Fiona",
+          productImage: "https://picsum.photos/400?image=583",
+          productStock: 49,
+          productPrice: "40702.21",
+          productSalePrice: "4477.24",
+          rating: 1,
+        },
+        {
+          productId: 1035,
+          productName: "complicated m Esmaria",
+          productImage: "https://picsum.photos/400?image=648",
+          productStock: 69,
+          productPrice: "3128.23",
+          productSalePrice: "938.47",
+          rating: 4,
+        },
+        {
+          productId: 1046,
+          productName: "voiceless emerald Sarita",
+          productImage: "https://picsum.photos/400?image=695",
+          productStock: 48,
+          productPrice: "21625.98",
+          productSalePrice: "8001.61",
+          rating: 3,
+        },
       ],
+     
     };
   },
+ async created() {
+		try {
+			const response = await fetch("https://randomuser.me/api/?results=12");
+			const data = await response.json();
+			this.object = data;
+	
+		} catch (error) {
+			console.error(error);
+		}
+	},
 };
 </script>
 
@@ -141,6 +202,7 @@ body {
 #app {
   display: grid;
   grid-template-columns: 1fr;
+
 }
 .top-part{
   display: grid;
@@ -162,6 +224,11 @@ body {
   justify-content: space-between;
   background-color: #248ea6;
   
+}
+.persons{
+  min-height: 1467px;
+  background-color:#5bccf6;
+  position: relative;
 }
 
 </style>

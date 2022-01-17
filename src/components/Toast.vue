@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-if="!visible">{{ hide }}</p>
+    <p v-if="!visible" :style="{color:color}">{{ hide }}</p>
   </div>
 </template>
 
@@ -8,7 +8,8 @@
 export default {
   props: ["hide"],
   data() {
-    return { visible: false };
+    return { visible: false, color:'red' }
+    
   },
   created() {
     setTimeout(() => {
@@ -32,3 +33,4 @@ p {
   border-radius: 10px;
 }
 </style>
+

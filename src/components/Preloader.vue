@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p v-if="success">This is loaded</p>
+  <div class="container">
+    <p v-if="success" :style="{background:color}">This is loaded</p>
     <div class="wrapper" v-if="loading">
       <div class="loads"></div>
     </div>
@@ -13,6 +13,7 @@ export default {
     return {
       loading: true,
       success: false,
+       color:'#5bccf6'
     };
   },
   created() {
@@ -39,6 +40,9 @@ export default {
     transform: rotate(360deg);
   }
 }
+.container{
+  margin: 20px 0px;
+}
 
 .wrapper {
   display: flex;
@@ -57,6 +61,6 @@ p {
   margin: 0px 20px;
   text-align: center;
   padding: 8px 0px;
-  background-color: #5bccf6;
+  color: #000;
 }
 </style>
