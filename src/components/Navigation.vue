@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import navbar from "./navbar.json";
+import navbar from "../navbar.json";
 export default {
   data() {
     return {
